@@ -9,7 +9,7 @@ import './styles/style.css'
 function App() {
   const key = 'ssaDerEkXfJC9VOETTvqZxHnPZzFeiRB';
   const searchTerm = 'Bojack Horseman';
-  const limit = 12;
+  const limit = 6;
   const apiUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${searchTerm}&limit=${limit}`
   const [bestScore, setBestScore] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
@@ -95,7 +95,7 @@ function App() {
           <Card
               className={'card'}
               id={item.id}
-              url={item.images["fixed_height"].url}
+              url={item.images["480w_still"].url}
               handleClick={handleCardClick}
           />
         )})}

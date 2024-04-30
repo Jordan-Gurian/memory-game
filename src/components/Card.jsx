@@ -8,7 +8,6 @@ export default function Card({ id, url, handleClick }) {
             className={'card'}
             src={url}
             onClick={() => handleClick(id)}
-            width={'400px'}
         />
     )
 }
