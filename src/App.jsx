@@ -94,7 +94,7 @@ function App() {
           <Card
               className={'card'}
               id={item.id}
-              url={item.images["original"].url}
+              url={item.images["fixed_height"].url}
               handleClick={handleCardClick}
           />
         )})}
