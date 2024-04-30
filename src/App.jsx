@@ -8,7 +8,7 @@ import Card from './components/Card.jsx'
 function App() {
   const key = 'ssaDerEkXfJC9VOETTvqZxHnPZzFeiRB';
   const searchTerm = 'Bojack Horseman';
-  const limit = 2;
+  const limit = 4;
   const apiUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${searchTerm}&limit=${limit}`
   const [bestScore, setBestScore] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
@@ -20,6 +20,7 @@ function App() {
       if (card.id === id) {
         card.clicked = true
         setCards(cards);
+        shuffleGifs();
       }
     })
     getScore(cards);
@@ -41,6 +42,18 @@ function App() {
   function unclickAll() {
     cards.map((card) => card.clicked = false);
     setCards(cards)
+  }
+
+  function shuffleGifs() {
+    let tempGifs = gifs;
+    let newGifs = [];
+    let tempInd;
+    while (gifs.length > 0) {
+      tempInd = Math.floor(Math.random() * tempGifs.length);
+      newGifs.push(tempGifs[tempInd]);
+      tempGifs.splice(tempInd, 1);
+    }
+    setGifs(newGifs);
   }
 
   function addCard(card) {
