@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 export default function Scoreboard({ currentScore, bestScore }) {
 
     return (
-        <div>
-            <p>
+        <div className={'scoreboard'}>
+            <p className={'score'}>
                 Score: {currentScore}
             </p>
-            <p>
+            <p className={'score'}>
                 Best: {bestScore}
             </p>
         </div>

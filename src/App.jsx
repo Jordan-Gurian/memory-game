@@ -4,11 +4,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Scoreboard from './components/Scoreboard.jsx'
 import Card from './components/Card.jsx'
+import './styles/style.css'
 
 function App() {
   const key = 'ssaDerEkXfJC9VOETTvqZxHnPZzFeiRB';
   const searchTerm = 'Bojack Horseman';
-  const limit = 4;
+  const limit = 12;
   const apiUrl = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${searchTerm}&limit=${limit}`
   const [bestScore, setBestScore] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
