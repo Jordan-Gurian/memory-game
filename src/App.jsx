@@ -26,15 +26,21 @@ function App() {
   }
 
   function getScore(cards) {
-      const score = cards.filter((card) => { card.clicked === true }).length;
+      const score = cards.filter((card) => card.clicked === true).length;
       if (score === currentScore) {
           setCurrentScore(0);
+          unclickAll();
       } else {
           setCurrentScore(score);
           if (score > bestScore) {
               setBestScore(score);
           }
       }
+  }
+
+  function unclickAll() {
+    cards.map((card) => card.clicked = false);
+    setCards(cards)
   }
 
   function addCard(card) {
