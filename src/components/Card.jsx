@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 
-export default function Card({ url }) {
-
-    // Defining API Key in file is VERY bad, but allowed here only
-
+export default function Card({ id, url, handleClick }) {
+    
     return (
-        <div>
-            <img
-                src={url}
-            />
-        </div>
+        <img
+            id={id}
+            className={'card'}
+            src={url}
+            onClick={() => handleClick(id)}
+        />
     )
 }

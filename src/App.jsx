@@ -13,12 +13,20 @@ function App() {
   const [bestScore, setBestScore] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
   const [gifs, setGifs] = useState([]);
-  let array = [...gifs];
+  const [cards, setCards] = useState([])
 
-  function getScore() {
-      cards.filter((card, score) => {
-          score += (card.clicked === true);
-      })
+  function handleCardClick(id) {
+    cards.map((card) => { 
+      if (card.id === id) {
+        card.clicked = true
+        setCards(cards);
+      }
+    })
+    getScore(cards);
+  }
+
+  function getScore(cards) {
+      const score = cards.filter((card) => { card.clicked === true }).length;
       if (score === currentScore) {
           setCurrentScore(0);
       } else {
@@ -29,11 +37,27 @@ function App() {
       }
   }
 
+  function addCard(card) {
+    if (cards.length === 0) {
+      setCards([...cards, { ...card }]);
+      return
+    }
+    for (let i = 0; i < cards.length; i++) {
+      if (cards[i].id === card.id) {
+        break;
+      }
+      if (i === cards.length - 1) {
+        setCards([...cards, { ...card }])
+        return
+      }
+    }
+  }
+
   useEffect(() => {
     fetch(apiUrl)
       .then(response => response.json())
       .then(response => setGifs(response.data));
-  }, [apiUrl]);
+  }, []);
 
   return (
     <div>
@@ -41,12 +65,21 @@ function App() {
         currentScore={currentScore}
         bestScore={bestScore}
       />
-      {array.map((item) => {
-        return (
-        <Card
-          url={item.images["original"].url}
-        />
-      )})}
+      <div className={'card-container'}>
+        {[...gifs].map((item) => {
+          addCard({ 
+            id: item.id, 
+            clicked: false,
+          });
+          return (
+          <Card
+              className={'card'}
+              id={item.id}
+              url={item.images["original"].url}
+              handleClick={handleCardClick}
+          />
+        )})}
+      </div>
     </div>
   )
 }
